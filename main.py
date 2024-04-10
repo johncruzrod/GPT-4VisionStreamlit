@@ -45,9 +45,11 @@ if st.button("Submit"):
                             "text": request
                         },
                         {
-                            "type": "image",
-                            "image": base64_image,
-                            "detail": "high"
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{base64_image}",
+                                "detail": "high"
+                            }
                         }
                     ]
                 }
@@ -72,6 +74,5 @@ if st.button("Submit"):
 
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred while making the request: {str(e)}")
-
     else:
         st.warning("Please upload an image.")
