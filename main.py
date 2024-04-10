@@ -4,8 +4,8 @@ import openai
 import requests
 
 # Set up the Streamlit app
-st.title("GPT Vision App")
-st.header('Upload an Image below, and ask ChatGPT a question about it:', divider='rainbow')
+st.title("GPT Vision App", divider='blue')
+st.header('Upload an Image below, and ask ChatGPT a question about it:', divider='blue')
 
 
 
