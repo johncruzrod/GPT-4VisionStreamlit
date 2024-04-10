@@ -70,7 +70,7 @@ if st.button("Submit"):
             if response.status_code == 200:
                 response_json = response.json()
                 output = response_json["choices"][0]["message"]["content"]
-                st.success(output)
+                st.markdown(output, unsafe_allow_html=True)
             else:
                 error_message = f"An error occurred while processing the request. Status code: {response.status_code}"
                 error_details = response.text
