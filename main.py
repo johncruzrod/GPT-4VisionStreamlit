@@ -5,6 +5,9 @@ import requests
 
 # Set up the Streamlit app
 st.title("GPT Vision App")
+st.header(body, anchor=None, *, help=None, divider=True "Hi")
+
+
 
 # Use Streamlit's secret management to safely store and access your API key
 api_key = st.secrets["OPENAI_API_KEY"]
