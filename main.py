@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 import openai
-import requests  # Import the requests library
+import requests
 
 # Set up the Streamlit app
 st.title("GPT Vision App")
@@ -46,7 +46,7 @@ if st.button("Submit"):
                         },
                         {
                             "type": "image",
-                            "image": {"url": f"data:image/jpeg;base64,{base64_image}"},
+                            "image": base64_image,
                             "detail": "high"
                         }
                     ]
@@ -55,15 +55,23 @@ if st.button("Submit"):
             "max_tokens": 300
         }
 
-        # Make the HTTP request to the OpenAI API
-        response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
+        try:
+            # Make the HTTP request to the OpenAI API
+            response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
 
-        # Check the response status and display the output or an error message
-        if response.status_code == 200:
-            response_json = response.json()
-            output = response_json["choices"][0]["message"]["content"]
-            st.success(output)
-        else:
-            st.error("An error occurred while processing the request.")
+            # Check the response status and display the output or an error message
+            if response.status_code == 200:
+                response_json = response.json()
+                output = response_json["choices"][0]["message"]["content"]
+                st.success(output)
+            else:
+                error_message = f"An error occurred while processing the request. Status code: {response.status_code}"
+                error_details = response.text
+                st.error(error_message)
+                st.error(f"Error details: {error_details}")
+
+        except requests.exceptions.RequestException as e:
+            st.error(f"An error occurred while making the request: {str(e)}")
+
     else:
         st.warning("Please upload an image.")
