@@ -3,9 +3,6 @@ import base64
 import openai
 import requests
 
-# Set up the Streamlit app
-st.title("GPT Vision App", anchor="center")
-
 # Use Streamlit's secret management to safely store and access your API key
 api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -27,7 +24,9 @@ with col1:
 
 # Main application in the second column
 with col2:
-    st.header('Upload an Image below, and ask ChatGPT a question about it:', anchor="center")
+    # Set up the Streamlit app
+    st.title("GPT Vision App")
+    st.header('Upload an Image below, and ask ChatGPT a question about it:')
 
     # Request input
     request = st.text_input("Type your question here:")
