@@ -28,8 +28,8 @@ if st.button("Submit"):
         # Encode the uploaded image
         base64_image = encode_image(uploaded_file)
 
-        # Display the uploaded image in a constrained size
-        st.image(uploaded_file, use_column_width=True)
+        # Display the uploaded image in a smaller size
+        st.image(uploaded_file, width=300)
 
         # Prepare the headers for the HTTP request to OpenAI API
         headers = {
