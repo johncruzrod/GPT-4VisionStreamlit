@@ -1,20 +1,18 @@
 import streamlit as st
 import base64
-import requests
-from io import BytesIO
 import openai
 
 # Set up the Streamlit app
 st.title("GPT Vision App")
 
-# Use Streamlit's secret management to safely store and access your API key and the correct password
-api_key = st.secrets["OPENAI_API_KEY"]
+# OpenAI API Key
+openai.api_key = "YOUR_OPENAI_API_KEY"
 
 # Function to encode the image
-def encode_image(image):
-    buffered = BytesIO()
-    image.save(buffered, format="PNG")
-    return base64.b64encode(buffered.getvalue()).decode('utf-8')
+def encode_image(uploaded_file):
+    file_content = uploaded_file.read()
+    base64_image = base64.b64encode(file_content).decode('utf-8')
+    return base64_image
 
 # File uploader
 uploaded_file = st.file_uploader("Choose an image", type=["png", "jpg", "jpeg", "gif", "webp"])
@@ -28,14 +26,9 @@ if st.button("Submit"):
         # Encode the uploaded image
         base64_image = encode_image(uploaded_file)
 
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
-        }
-
-        payload = {
-            "model": "gpt-4-turbo",
-            "messages": [
+        response = openai.ChatCompletion.create(
+            model="gpt-4-turbo",
+            messages=[
                 {
                     "role": "user",
                     "content": [
@@ -46,22 +39,19 @@ if st.button("Submit"):
                         {
                             "type": "image_url",
                             "image_url": {
-                                "url": f"data:image/jpeg;base64,{base64_image}",
+                                "url": f"data:image/png;base64,{base64_image}",
                                 "detail": "high"
                             }
                         }
                     ]
                 }
             ],
-            "max_tokens": 4000
-        }
-
-        # Send the request to the GPT Vision API
-        response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
+            max_tokens=300
+        )
 
         # Display the output
-        if response.status_code == 200:
-            output = response.json()["choices"][0]["message"]["content"]
+        if response.status == 200:
+            output = response.choices[0].message.content
             st.success(output)
         else:
             st.error("An error occurred while processing the request.")
