@@ -5,8 +5,8 @@ import openai
 # Set up the Streamlit app
 st.title("GPT Vision App")
 
-# Use Streamlit's secret management to safely store and access your API key and the correct password
-api_key = st.secrets["OPENAI_API_KEY"]
+# Use Streamlit's secret management to safely store and access your API key
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Function to encode the image
 def encode_image(uploaded_file):
@@ -37,11 +37,9 @@ if st.button("Submit"):
                             "text": request
                         },
                         {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/png;base64,{base64_image}",
-                                "detail": "high"
-                            }
+                            "type": "image",
+                            "image": base64_image,
+                            "detail": "high"
                         }
                     ]
                 }
