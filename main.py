@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
+import requests
 import openai
-import requests  # Import the requests library
 
 # Set up the Streamlit app
 st.title("GPT Vision App")
@@ -27,13 +27,11 @@ if st.button("Submit"):
         # Encode the uploaded image
         base64_image = encode_image(uploaded_file)
 
-        # Prepare the headers for the HTTP request to OpenAI API
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
         }
 
-        # Prepare the payload with the encoded image and the user's request
         payload = {
             "model": "gpt-4-turbo",
             "messages": [
@@ -46,8 +44,10 @@ if st.button("Submit"):
                         },
                         {
                             "type": "image",
-                            "image": {"url": f"data:image/jpeg;base64,{base64_image}"},
-                            "detail": "high"
+                            "image": {
+                                "url": f"data:image/jpeg;base64,{base64_image}",
+                                "detail": "high"
+                            }
                         }
                     ]
                 }
@@ -55,15 +55,17 @@ if st.button("Submit"):
             "max_tokens": 300
         }
 
-        # Make the HTTP request to the OpenAI API
         response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
 
-        # Check the response status and display the output or an error message
+        # Debug: Print the status code and response content for troubleshooting
+        print("Status Code:", response.status_code)
+        print("Response Content:", response.text)
+
         if response.status_code == 200:
-            response_json = response.json()
-            output = response_json["choices"][0]["message"]["content"]
+            response_data = response.json()
+            output = response_data['choices'][0]['message']['content']
             st.success(output)
         else:
-            st.error("An error occurred while processing the request.")
+            st.error("An error occurred while processing the request. Check logs for details.")
     else:
         st.warning("Please upload an image.")
