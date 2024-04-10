@@ -54,7 +54,7 @@ if st.button("Submit"):
                     ]
                 }
             ],
-            "max_tokens": 300
+            "max_tokens": 4000
         }
 
         try:
