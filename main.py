@@ -22,7 +22,7 @@ def encode_image(uploaded_file):
 uploaded_file = st.file_uploader("Choose an image", type=["png", "jpg", "jpeg", "gif", "webp"])
 
 # Request input
-request = st.text_input("Enter your request")
+request = st.text_input("Type your question here:")
 
 # Submit button
 if st.button("Submit"):
