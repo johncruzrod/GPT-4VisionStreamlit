@@ -1,6 +1,8 @@
 import streamlit as st
 import base64
 import requests
+from io import BytesIO
+import openai
 
 # Set up the Streamlit app
 st.title("GPT Vision App")
