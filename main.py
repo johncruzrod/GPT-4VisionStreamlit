@@ -7,8 +7,6 @@ import requests
 st.title("GPT Vision App")
 st.header('Upload an Image below, and ask ChatGPT a question about it:', divider='blue')
 
-
-
 # Use Streamlit's secret management to safely store and access your API key
 api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -30,12 +28,14 @@ if st.button("Submit"):
         # Encode the uploaded image
         base64_image = encode_image(uploaded_file)
 
+        # Display the uploaded image in a constrained size
+        st.image(uploaded_file, use_column_width=True)
+
         # Prepare the headers for the HTTP request to OpenAI API
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
         }
-
         # Prepare the payload with the encoded image and the user's request
         payload = {
             "model": "gpt-4-turbo",
@@ -59,11 +59,9 @@ if st.button("Submit"):
             ],
             "max_tokens": 4000
         }
-
         try:
             # Make the HTTP request to the OpenAI API
             response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-
             # Check the response status and display the output or an error message
             if response.status_code == 200:
                 response_json = response.json()
@@ -74,7 +72,6 @@ if st.button("Submit"):
                 error_details = response.text
                 st.error(error_message)
                 st.error(f"Error details: {error_details}")
-
         except requests.exceptions.RequestException as e:
             st.error(f"An error occurred while making the request: {str(e)}")
     else:
