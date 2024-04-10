@@ -1,12 +1,12 @@
 import streamlit as st
 import base64
-import openai
+import requests  # Import requests
 
 # Set up the Streamlit app
 st.title("GPT Vision App")
 
 # Use Streamlit's secret management to safely store and access your API key
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+api_key = st.secrets["OPENAI_API_KEY"]
 
 # Function to encode the image
 def encode_image(uploaded_file):
@@ -26,9 +26,14 @@ if st.button("Submit"):
         # Encode the uploaded image
         base64_image = encode_image(uploaded_file)
 
-        response = openai.ChatCompletion.create(
-            model="gpt-4-turbo",
-            messages=[
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        }
+
+        payload = {
+            "model": "gpt-4-turbo",
+            "messages": [
                 {
                     "role": "user",
                     "content": [
@@ -38,18 +43,22 @@ if st.button("Submit"):
                         },
                         {
                             "type": "image",
-                            "image": base64_image,
-                            "detail": "high"
+                            "image": {
+                                "url": f"data:image/jpeg;base64,{base64_image}",
+                                "detail": "high"
+                            }
                         }
                     ]
                 }
             ],
-            max_tokens=300
-        )
+            "max_tokens": 300
+        }
 
-        # Display the output
-        if response.status == 200:
-            output = response.choices[0].message.content
+        response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
+
+        if response.status_code == 200:
+            response_data = response.json()
+            output = response_data['choices'][0]['message']['content']
             st.success(output)
         else:
             st.error("An error occurred while processing the request.")
