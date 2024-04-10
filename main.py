@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
-import requests
 import openai
+import requests  # Import the requests library
 
 # Set up the Streamlit app
 st.title("GPT Vision App")
@@ -21,32 +21,21 @@ uploaded_file = st.file_uploader("Choose an image", type=["png", "jpg", "jpeg", 
 # Request input
 request = st.text_input("Enter your request")
 
-# Debugging function to log messages to the Streamlit UI
-def log_to_app(message, message_type="info"):
-    if message_type == "info":
-        st.info(message)
-    elif message_type == "success":
-        st.success(message)
-    elif message_type == "error":
-        st.error(message)
-    elif message_type == "warning":
-        st.warning(message)
-    else:
-        st.text(message)
-
 # Submit button
 if st.button("Submit"):
     if uploaded_file is not None:
         # Encode the uploaded image
         base64_image = encode_image(uploaded_file)
 
+        # Prepare the headers for the HTTP request to OpenAI API
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
         }
 
+        # Prepare the payload with the encoded image and the user's request
         payload = {
-            "model": "text-davinci-003",  # Be sure to use the appropriate model name here
+            "model": "gpt-4-turbo",
             "messages": [
                 {
                     "role": "user",
@@ -57,11 +46,8 @@ if st.button("Submit"):
                         },
                         {
                             "type": "image",
-                            "image": {
-                                # Ensure you are using the data property, not url, for base64 images
-                                "data": base64_image,
-                                "detail": "high"
-                            }
+                            "image": {"url": f"data:image/jpeg;base64,{base64_image}"},
+                            "detail": "high"
                         }
                     ]
                 }
@@ -69,19 +55,15 @@ if st.button("Submit"):
             "max_tokens": 300
         }
 
-        # Instead of using print, use our logging function to display in the app
-        try:
-            response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-        except Exception as e:
-            log_to_app(f"An exception occurred: {str(e)}", "error")
-            return
+        # Make the HTTP request to the OpenAI API
+        response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
 
+        # Check the response status and display the output or an error message
         if response.status_code == 200:
-            response_data = response.json()
-            output = response_data['choices'][0]['message']['content']
-            log_to_app(output, "success")
+            response_json = response.json()
+            output = response_json["choices"][0]["message"]["content"]
+            st.success(output)
         else:
-            log_to_app("An error occurred while processing the request.", "error")
-            log_to_app(f"Status Code: {response.status_code}\nResponse Content: {response.text}", "warning")
+            st.error("An error occurred while processing the request.")
     else:
-        log_to_app("Please upload an image.", "warning")
+        st.warning("Please upload an image.")
