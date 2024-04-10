@@ -15,18 +15,14 @@ def encode_image(uploaded_file):
 # Create two columns: one for the image and one for the main application
 col1, col2 = st.columns([1, 2])
 
-# File uploader in the first column
-with col1:
-    uploaded_file = st.file_uploader("Choose an image", type=["png", "jpg", "jpeg", "gif", "webp"])
-    if uploaded_file is not None:
-        # Display the uploaded image as soon as it is uploaded
-        st.image(uploaded_file, width=300)
-
 # Main application in the second column
 with col2:
     # Set up the Streamlit app
     st.title("GPT Vision App")
     st.header('Upload an Image below, and ask ChatGPT a question about it:')
+
+    # File uploader
+    uploaded_file = st.file_uploader("Choose an image", type=["png", "jpg", "jpeg", "gif", "webp"])
 
     # Request input
     request = st.text_input("Type your question here:")
@@ -36,6 +32,10 @@ with col2:
         if uploaded_file is not None:
             # Encode the uploaded image
             base64_image = encode_image(uploaded_file)
+
+            # Display the uploaded image in the first column
+            with col1:
+                st.image(uploaded_file, width=300)
 
             # Prepare the headers for the HTTP request to OpenAI API
             headers = {
