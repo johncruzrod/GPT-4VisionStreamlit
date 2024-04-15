@@ -33,7 +33,6 @@ with left_column:
 
 # Add your main component to the middle column
 with main_column:
-    st.title("GPT Vision App")
     st.header('Upload an Image below, and ask ChatGPT a question about it:')
     # File uploader
     uploaded_file = st.file_uploader("Choose an image", type=["png", "jpg", "jpeg", "gif", "webp"])
