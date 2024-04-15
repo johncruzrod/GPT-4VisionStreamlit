@@ -96,10 +96,13 @@ with main_column:
 with right_column:
     st.write("""
     <div style="padding: 20px;">
-    <ul style="list-style-type: square; color: #333333; font-family: 'Georgia', serif; font-size: 16px; line-height: 1.5;">
+    <ul style="list-style-type: square; color: #333333; font-family: 'Arial', serif; font-size: 16px; line-height: 1.5;">
       <li><strong>Extract the table from this image:</strong> Effortlessly extract tabular data from any image, making data analysis a breeze.</li>
+      <li> </li>
       <li><strong>Tell me where this photo was taken:</strong> Uncover the location depicted in your photos, unlocking a world of geographical context.</li>
+      <li> </li>
       <li><strong>Describe the objects in this scene:</strong> Get detailed descriptions of the objects, people, and elements present in your images.</li>
+      <li> </li>
       <li><strong>Analyze the emotions in this portrait:</strong> Gain insights into the emotional state of individuals captured in your portraits.</li>
     </ul>
     </div>
