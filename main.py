@@ -28,7 +28,6 @@ with left_column:
     <p style="color: #4c4c4c; text-align: justify; font-size: 18px; line-height: 1.6;">
     From extracting tabular data to identifying locations, GPT Vision is your gateway to a world of visual insights. Experience the future of image analysis today!
     </p>
-    <a href="#" style="display: inline-block; background-color: #007bff; color: #ffffff; font-size: 18px; font-weight: bold; text-decoration: none; padding: 12px 30px; border-radius: 30px; margin-top: 20px; transition: background-color 0.3s ease;">Get Started</a>
     </div>
     """, unsafe_allow_html=True)
 
