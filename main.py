@@ -20,11 +20,15 @@ left_column, main_column, right_column = st.columns([1, 2, 1])
 # Add content to the left column
 with left_column:
     st.write("""
-    <div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px; font-family: 'Courier New', Courier, monospace; text-align: center;">
-    <h2 style="color: #4d4d4d; font-size: 24px;">Unleash the Power of GPT Vision</h2>
-    <p style="color: #666666; text-align: justify; font-size: 16px; line-height: 1.5;">
-    Unlock the secrets hidden within your images with GPT Vision. This cutting-edge technology harnesses the power of OpenAI's language models to analyze and interpret visual data like never before. From extracting tabular data to identifying locations, GPT Vision is your gateway to a world of visual insights.
+    <div style="background-color: #f8f9fa; padding: 30px; border-radius: 15px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <h2 style="color: #1a1a1a; font-size: 32px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">Unleash the Power of GPT Vision</h2>
+    <p style="color: #4c4c4c; text-align: justify; font-size: 18px; line-height: 1.6; margin-bottom: 20px;">
+    Unlock the secrets hidden within your images with <strong style="color: #007bff;">GPT Vision</strong>. This cutting-edge technology harnesses the power of OpenAI's language models to analyze and interpret visual data like never before.
     </p>
+    <p style="color: #4c4c4c; text-align: justify; font-size: 18px; line-height: 1.6;">
+    From extracting tabular data to identifying locations, GPT Vision is your gateway to a world of visual insights. Experience the future of image analysis today!
+    </p>
+    <a href="#" style="display: inline-block; background-color: #007bff; color: #ffffff; font-size: 18px; font-weight: bold; text-decoration: none; padding: 12px 30px; border-radius: 30px; margin-top: 20px; transition: background-color 0.3s ease;">Get Started</a>
     </div>
     """, unsafe_allow_html=True)
 
