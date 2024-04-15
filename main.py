@@ -12,15 +12,15 @@ def encode_image(uploaded_file):
     base64_image = base64.b64encode(file_content).decode('utf-8')
     return base64_image
 
-# Set up the columns with equal width
-left_column, main_column, right_column = st.columns(3)
+# Set up the columns with adjusted ratios
+left_column, main_column, right_column = st.columns([1, 2, 1])
 
 # Add content to the left column
 with left_column:
     st.write("""
     <div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px; font-family: 'Courier New', Courier, monospace; text-align: center;">
-    <h2 style="color: #4d4d4d;">Unleash the Power of GPT Vision</h2>
-    <p style="color: #666666; text-align: justify;">
+    <h2 style="color: #4d4d4d; font-size: 24px;">Unleash the Power of GPT Vision</h2>
+    <p style="color: #666666; text-align: justify; font-size: 16px; line-height: 1.5;">
     Unlock the secrets hidden within your images with GPT Vision. This cutting-edge technology harnesses the power of OpenAI's language models to analyze and interpret visual data like never before. From extracting tabular data to identifying locations, GPT Vision is your gateway to a world of visual insights.
     </p>
     </div>
@@ -93,10 +93,12 @@ with main_column:
 # Add content to the right column
 with right_column:
     st.write("""
-    <ul style="list-style-type: square; color: #333333; font-family: 'Georgia', serif;">
+    <div style="padding: 20px;">
+    <ul style="list-style-type: square; color: #333333; font-family: 'Georgia', serif; font-size: 16px; line-height: 1.5;">
       <li><strong>Extract the table from this image:</strong> Effortlessly extract tabular data from any image, making data analysis a breeze.</li>
       <li><strong>Tell me where this photo was taken:</strong> Uncover the location depicted in your photos, unlocking a world of geographical context.</li>
       <li><strong>Describe the objects in this scene:</strong> Get detailed descriptions of the objects, people, and elements present in your images.</li>
       <li><strong>Analyze the emotions in this portrait:</strong> Gain insights into the emotional state of individuals captured in your portraits.</li>
     </ul>
+    </div>
     """, unsafe_allow_html=True)
