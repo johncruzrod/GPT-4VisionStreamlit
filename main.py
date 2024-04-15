@@ -31,13 +31,13 @@ if st.button("Submit"):
     if uploaded_file is not None:
         # Encode the uploaded image
         base64_image = encode_image(uploaded_file)
-        
+
         # Prepare the headers for the HTTP request to OpenAI API
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
         }
-        
+
         # Prepare the payload with the encoded image and the user's request
         payload = {
             "model": "gpt-4-turbo",
@@ -61,22 +61,26 @@ if st.button("Submit"):
             ],
             "max_tokens": 4000
         }
-        
-        try:
-            # Make the HTTP request to the OpenAI API
-            response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-            
-            # Check the response status and display the output or an error message
-            if response.status_code == 200:
-                response_json = response.json()
-                output = response_json["choices"][0]["message"]["content"]
-                st.markdown(output, unsafe_allow_html=True)
-            else:
-                error_message = f"An error occurred while processing the request. Status code: {response.status_code}"
-                error_details = response.text
-                st.error(error_message)
-                st.error(f"Error details: {error_details}")
-        except requests.exceptions.RequestException as e:
-            st.error(f"An error occurred while making the request: {str(e)}")
+
+        # Show the loading wheel
+        with st.spinner("Processing your request..."):
+            try:
+                # Make the HTTP request to the OpenAI API
+                response = requests.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
+
+                # Check the response status and display the output or an error message
+                if response.status_code == 200:
+                    response_json = response.json()
+                    output = response_json["choices"][0]["message"]["content"]
+                    st.markdown(output, unsafe_allow_html=True)
+                else:
+                    error_message = f"An error occurred while processing the request. Status code: {response.status_code}"
+                    error_details = response.text
+                    st.error(error_message)
+                    st.error(f"Error details: {error_details}")
+
+            except requests.exceptions.RequestException as e:
+                st.error(f"An error occurred while making the request: {str(e)}")
+
     else:
         st.warning("Please upload an image.")
