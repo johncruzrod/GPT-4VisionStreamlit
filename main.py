@@ -12,8 +12,8 @@ def encode_image(uploaded_file):
     base64_image = base64.b64encode(file_content).decode('utf-8')
     return base64_image
 
-# Set up the columns
-left_column, main_column, right_column = st.columns([1, 2, 1])
+# Set up the columns with equal width
+left_column, main_column, right_column = st.columns(3)
 
 # Add content to the left column
 with left_column:
