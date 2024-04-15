@@ -3,6 +3,8 @@ import base64
 import openai
 import requests
 
+st.set_page_config(layout="wide")
+
 # Use Streamlit's secret management to safely store and access your API key
 api_key = st.secrets["OPENAI_API_KEY"]
 
