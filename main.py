@@ -16,6 +16,25 @@ def encode_image(uploaded_file):
 st.title("GPT Vision App")
 st.header('Upload an Image below, and ask ChatGPT a question about it:')
 
+# Add some writing in a funky format
+st.write("""
+<div style="background-color: #f0f0f0; padding: 20px; border-radius: 10px;">
+<h2 style="color: #4d4d4d; font-family: 'Courier New', Courier, monospace; text-align: center;">Unleash the Power of GPT Vision</h2>
+<p style="color: #666666; font-family: 'Comic Sans MS', cursive, sans-serif; text-align: justify;">
+Unlock the secrets hidden within your images with GPT Vision. This cutting-edge technology harnesses the power of OpenAI's language models to analyze and interpret visual data like never before. From extracting tabular data to identifying locations, GPT Vision is your gateway to a world of visual insights.</p>
+</div>
+""", unsafe_allow_html=True)
+
+# Use case examples
+st.write("""
+<ul style="list-style-type: square; color: #333333; font-family: 'Georgia', serif;">
+  <li><strong>Extract the table from this image:</strong> Effortlessly extract tabular data from any image, making data analysis a breeze.</li>
+  <li><strong>Tell me where this photo was taken:</strong> Uncover the location depicted in your photos, unlocking a world of geographical context.</li>
+  <li><strong>Describe the objects in this scene:</strong> Get detailed descriptions of the objects, people, and elements present in your images.</li>
+  <li><strong>Analyze the emotions in this portrait:</strong> Gain insights into the emotional state of individuals captured in your portraits.</li>
+</ul>
+""", unsafe_allow_html=True)
+
 # File uploader
 uploaded_file = st.file_uploader("Choose an image", type=["png", "jpg", "jpeg", "gif", "webp"])
 
