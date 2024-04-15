@@ -99,9 +99,10 @@ with right_column:
    <p style="color: #333333; font-family: 'Arial', serif; font-size: 16px; line-height: 1.5;"><strong>Extract the table from this image:</strong> Effortlessly extract tabular data from any image, making data analysis a breeze.</p>
    
    <p style="color: #333333; font-family: 'Arial', serif; font-size: 16px; line-height: 1.5;"><strong>Tell me where this photo was taken:</strong> Uncover the location depicted in your photos, unlocking a world of geographical context.</p>
+
+   <p style="color: #333333; font-family: 'Arial', serif; font-size: 16px; line-height: 1.5;"><strong>Extract the writing from this whiteboard:</strong> Capture your notes and turn them into structured text.</p>
    
    <p style="color: #333333; font-family: 'Arial', serif; font-size: 16px; line-height: 1.5;"><strong>Describe the objects in this scene:</strong> Get detailed descriptions of the objects, people, and elements present in your images.</p>
    
-   <p style="color: #333333; font-family: 'Arial', serif; font-size: 16px; line-height: 1.5;"><strong>Analyze the emotions in this portrait:</strong> Gain insights into the emotional state of individuals captured in your portraits.</p>
    </div>
    """, unsafe_allow_html=True)
