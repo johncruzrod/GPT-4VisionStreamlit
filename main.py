@@ -13,7 +13,7 @@ def encode_image(uploaded_file):
    return base64_image
 
 # Set up the columns
-left_column, main_column, right_column = st.columns([1, 4, 1])
+left_column, main_column, right_column = st.columns([2, 6, 2])
 
 # Add content to the left column
 with left_column:
@@ -103,10 +103,12 @@ with main_column:
 # Add content to the right column
 with right_column:
    st.write("""
+   <div style="padding: 20px;">
    <ul style="list-style-type: square; color: #333333; font-family: 'Georgia', serif;">
      <li><strong>Extract the table from this image:</strong> Effortlessly extract tabular data from any image, making data analysis a breeze.</li>
      <li><strong>Tell me where this photo was taken:</strong> Uncover the location depicted in your photos, unlocking a world of geographical context.</li>
      <li><strong>Describe the objects in this scene:</strong> Get detailed descriptions of the objects, people, and elements present in your images.</li>
      <li><strong>Analyze the emotions in this portrait:</strong> Gain insights into the emotional state of individuals captured in your portraits.</li>
    </ul>
+   </div>
    """, unsafe_allow_html=True)
