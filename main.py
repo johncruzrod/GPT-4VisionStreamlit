@@ -13,7 +13,7 @@ def encode_image(uploaded_file):
    return base64_image
 
 # Set up the columns
-left_column, main_column, right_column = st.columns([1, 2, 1])
+left_column, main_column, right_column = st.columns([1, 4, 1])
 
 # Add content to the left column
 with left_column:
